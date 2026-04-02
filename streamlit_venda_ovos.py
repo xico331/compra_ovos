@@ -17,10 +17,11 @@ st.set_page_config(page_title="Encomenda de Ovos", page_icon="🥚")
 
 st.title("🥚 Encomenda de Ovos Frescos")
 
-# --- FORMULÁRIO DO CLIENTE (SIMPLIFICADO) ---
+# --- FORMULÁRIO DO CLIENTE (SIMPLIFICADO E COM MEIAS DÚZIAS) ---
 with st.form("form_encomenda"):
     nome = st.text_input("O seu Nome")
-    duzias = st.number_input("Quantas dúzias deseja?", min_value=1, step=1)
+    # Alterado para aceitar decimais (min_value=0.5, step=0.5, valor inicial=1.0)
+    duzias = st.number_input("Quantas dúzias deseja? (Ex: 0.5 para meia dúzia)", min_value=0.5, step=0.5, value=1.0)
     
     # Botão de envio
     submit = st.form_submit_button("Enviar Encomenda", type="primary")
@@ -28,7 +29,7 @@ with st.form("form_encomenda"):
 # --- LÓGICA DE ENVIO ---
 if submit:
     if nome:
-        # Prepara os dados só com o que pediste
+        # Prepara os dados
         dados_encomenda = {
             "nome": nome,
             "duzias": duzias,
@@ -41,10 +42,10 @@ if submit:
             resposta = requests.post(url_envio, json=dados_encomenda)
             
             if resposta.status_code == 200:
-                st.success(f"✅ Obrigado, {nome}! A tua encomenda de {duzias} dúzia(s) foi registada.")
+                st.success(f"✅ Obrigado, {nome}! A sua encomenda de {duzias} dúzia(s) foi registada.")
                 st.balloons()
             else:
-                st.error("❌ Erro de ligação. Tenta novamente.")
+                st.error("❌ Erro de ligação. Tente novamente.")
                 
         except Exception as e:
             st.error("Erro no sistema.")
