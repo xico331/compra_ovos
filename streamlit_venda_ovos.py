@@ -10,7 +10,7 @@ from datetime import datetime
 
 # --- CONFIGURAÇÃO DO FIREBASE ---
 # Substitui pelo teu link exato! (Sem barra no final)
-FIREBASE_URL = "https://ovos-50d79-default-rtdb.europe-west1.firebasedatabase.app/"
+FIREBASE_URL = "https://ovos-50d79-default-rtdb.europe-west1.firebasedatabase.app"
 
 st.set_page_config(page_title="Encomenda de Ovos", page_icon="🥚")
 
